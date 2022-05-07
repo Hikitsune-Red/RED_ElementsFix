@@ -1,5 +1,5 @@
 /*:
- * @plugindesc v1.00 A simple plug-in designed to adjust the sprite draw of Time Elements characters
+ * @plugindesc v1.01 A simple plug-in designed to adjust the sprite draw of Time Elements characters
  * @author Hikitsune-Red 火狐
  *
  * @help
