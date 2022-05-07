@@ -51,4 +51,27 @@
 			this.y = this._character.screenY() + $gameMap.tileHeight();
 		}
 	};
+	
+	var oldupdatepos = Sprite_Actor.prototype.updatePosition;
+	
+	Sprite_Actor.prototype.updatePosition = function() {
+		//Sprite_Battler.prototype.updatePosition.call(this);
+		oldupdatepos.call(this);
+		
+		if (this._isElementsCharacter) {
+			this.y += 48;
+			this._shadowSprite.y = -48;
+		}
+	};
+	
+	var oldupdatebitmap = Sprite_Actor.prototype.updateBitmap;
+	
+	Sprite_Actor.prototype.updateBitmap = function() {
+		var name = this._actor.battlerName();
+		if (this._battlerName !== name) {
+			this._isElementsCharacter = ImageManager.isElementsCharacter(name);
+		}
+		
+		oldupdatebitmap.call(this);
+	};
 }) ();
