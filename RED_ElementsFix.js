@@ -1,5 +1,5 @@
 /*:
- * @plugindesc v1.02 A simple plug-in designed to adjust the sprite draw of Time Elements characters
+ * @plugindesc v1.04 A simple plug-in designed to adjust the sprite draw of Time Elements characters
  * @author Hikitsune-Red 火狐
  *
  * @help
@@ -87,8 +87,10 @@
 			flag = 2;
 		}
 		
-		if (flag == 0 && a.y !== b.y) {
-			return a.y - b.y;
+		if (flag == 0) {
+			return oldcompare.call(this, a, b);
+		} else if (a.z !== b.z) {
+			return a.z - b.z;
 		} else if (flag == 1 && a._character.screenY() !== b.y) {
 			return a._character.screenY() - b.y;
 		} else if (flag == 2 && a.y !== b._character.screenY()) {
