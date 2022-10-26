@@ -88,7 +88,7 @@
 		}
 		
 		if (flag == 0) {
-			return oldcompare(a, b);
+			return oldcompare.call(this, a, b);
 		} else if (flag == 1 && a._character.screenY() !== b.y) {
 			return a._character.screenY() - b.y;
 		} else if (flag == 2 && a.y !== b._character.screenY()) {
