@@ -1,5 +1,5 @@
 /*:
- * @plugindesc v1.01 A simple plug-in designed to adjust the sprite draw of Time Elements characters
+ * @plugindesc v1.02 A simple plug-in designed to adjust the sprite draw of Time Elements characters
  * @author Hikitsune-Red 火狐
  *
  * @help
@@ -73,5 +73,32 @@
 		}
 		
 		oldupdatebitmap.call(this);
+	};
+	
+	var oldcompare = Tilemap.prototype._compareChildOrder;
+	
+	Tilemap.prototype._compareChildOrder = function(a, b) {
+		var flag = 0;
+		if (a._isElementsCharacter && b._isElementsCharacter) {
+			flag = 3;
+		} else if (a._isElementsCharacter) {
+			flag = 1;
+		} else if (b._isElementsCharacter) {
+			flag = 2;
+		}
+		
+		if (a.z !== b.z) {
+			return a.z - b.z;
+		} else if (flag == 0 && a.y !== b.y) {
+			return a.y - b.y;
+		} else if (flag == 1 && a._character.screenY() !== b.y) {
+			return a._character.screenY() - b.y;
+		} else if (flag == 2 && a.y !== b._character.screenY()) {
+			return a.y - b._character.screenY();
+		} else if (flag == 3 && a._character.screenY() !== b._character.screenY()) {
+			return a._character.screenY() - b._character.screenY();
+		} else {
+			return a.spriteId - b.spriteId;
+		}
 	};
 }) ();
